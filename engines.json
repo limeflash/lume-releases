@@ -1,0 +1,14 @@
+{
+  "mihomo": {
+    "version": "v1.19.31",
+    "asset": "mihomo-windows-amd64-compatible-v1.19.31.zip",
+    "sha256": "93d14e9a13b49b2f2d256202d02cc8d14a7c4695edf084cae0f941986bc9c218",
+    "blob": "20bc76d422d18fb065ecf4b5325d24aa8281d329"
+  },
+  "usque": {
+    "version": "v4.2.1",
+    "asset": "usque_4.2.1_windows_amd64.zip",
+    "sha256": "f6f7f0a1a2bc9bcc15cf563ec1f892d00690a92c086b23ed3211b802209099e7",
+    "blob": "380106da9bda1717c367425fa8dcd28ec9b10429"
+  }
+}
