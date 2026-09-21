@@ -1,0 +1,15 @@
+{
+  "version": "0.2.38",
+  "notes": "",
+  "pub_date": "2026-09-21T20:03:31Z",
+  "platforms": {
+    "windows-x86_64": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/560b297d39433ace5d60549426071c1201ba7df5",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEliLyt5aTJTeWtyQy9RSUZudHZPU3k2YVM5ckpYb0kvNHF6Z1p3TkhsdG5yZUlDSUsxQ1N4Z2Ezb2hsY2RpSzYvVzNLMHdlcDNzWGJnTm1wZnZJQ1F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwMDIwOTc0CWZpbGU6THVtZV8wLjIuMzhfeDY0LXNldHVwLmV4ZQpXUGJvK1p1Z2tad2NGOFJYZWM5NHFDclE2U2I3Q0lPMm51SnRSYUd4TU9DQXdheUltVHdjV2JVRGR2OWNCMnNUanFITHdCSjA3SXFzamM2WDMxa3lDZz09Cg=="
+    },
+    "windows-x86_64-nsis": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/560b297d39433ace5d60549426071c1201ba7df5",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEliLyt5aTJTeWtyQy9RSUZudHZPU3k2YVM5ckpYb0kvNHF6Z1p3TkhsdG5yZUlDSUsxQ1N4Z2Ezb2hsY2RpSzYvVzNLMHdlcDNzWGJnTm1wZnZJQ1F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwMDIwOTc0CWZpbGU6THVtZV8wLjIuMzhfeDY0LXNldHVwLmV4ZQpXUGJvK1p1Z2tad2NGOFJYZWM5NHFDclE2U2I3Q0lPMm51SnRSYUd4TU9DQXdheUltVHdjV2JVRGR2OWNCMnNUanFITHdCSjA3SXFzamM2WDMxa3lDZz09Cg=="
+    }
+  }
+}
