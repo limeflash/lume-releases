@@ -1,0 +1,102 @@
+# Builds Lume for macOS from the private limeflash/lume-client and proves it runs on the Macs people
+# actually have: Apple Silicon on macOS 26, 27 and 15, Intel on macOS 26 (Intel stops at 26).
+# It lives here because Actions is free in a public repo, while the account's private-repo Actions
+# are blocked by billing.
+#
+# Run: Actions → mac → Run workflow, or  gh workflow run mac.yml -R limeflash/lume-releases -f ref=<ref>
+# Secret: LUME_CLIENT_KEY — the private half of a read-only deploy key on lume-client.
+# These logs are public: cargo prints short diagnostics (no source lines), and no source is uploaded.
+name: mac
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: lume-client branch, tag or commit
+        default: main
+
+concurrency: mac-${{ inputs.ref }}
+
+jobs:
+  build:
+    name: build + smoke (${{ matrix.name }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: arm64 · macOS 26, os: macos-26, arch: arm64 }
+          - { name: x64 · macOS 26 Intel, os: macos-26-intel, arch: x64 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: limeflash/lume-client
+          ref: ${{ inputs.ref }}
+          ssh-key: ${{ secrets.LUME_CLIENT_KEY }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+          key: ${{ matrix.arch }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Unit tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml --bin lume --message-format short
+      - name: Bundle (.app + .dmg)
+        run: pnpm exec tauri build --bundles app,dmg -- --message-format short
+      - name: Smoke
+        run: bash scripts/mac-smoke.sh src-tauri/target/release/bundle/macos/Lume.app
+      - name: Hand the Apple Silicon build to the other macOS versions
+        if: matrix.arch == 'arm64'
+        run: tar -czf lume-mac.tgz -C src-tauri/target/release/bundle/macos Lume.app -C "$GITHUB_WORKSPACE/scripts" mac-smoke.sh
+      - uses: actions/upload-artifact@v4
+        if: matrix.arch == 'arm64'
+        with:
+          name: lume-mac-arm64
+          path: lume-mac.tgz
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shot ${{ matrix.name }}
+          path: |
+            shot.png
+            lume.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  smoke:
+    name: smoke (arm64 · ${{ matrix.name }})
+    needs: build
+    # The x64 build failing is no reason not to try the arm64 one on other versions.
+    if: ${{ !cancelled() }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: macOS 27, os: xcode-27 }
+          - { name: macOS 15, os: macos-15 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: lume-mac-arm64
+      - run: tar -xzf lume-mac.tgz && bash mac-smoke.sh Lume.app
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shot ${{ matrix.name }}
+          path: |
+            shot.png
+            lume.log
+          retention-days: 7
+          if-no-files-found: ignore
