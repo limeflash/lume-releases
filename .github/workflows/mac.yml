@@ -18,15 +18,9 @@ on:
 concurrency: mac-${{ inputs.ref }}
 
 jobs:
-  build:
-    name: build + smoke (${{ matrix.name }})
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { name: arm64 · macOS 26, os: macos-26, arch: arm64 }
-          - { name: x64 · macOS 26 Intel, os: macos-26-intel, arch: x64 }
-    runs-on: ${{ matrix.os }}
+  arm64:
+    name: build + smoke (arm64 · macOS 26)
+    runs-on: macos-26
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
@@ -45,7 +39,7 @@ jobs:
       - uses: swatinem/rust-cache@v2
         with:
           workspaces: src-tauri -> target
-          key: ${{ matrix.arch }}
+          key: arm64
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Unit tests
@@ -55,10 +49,8 @@ jobs:
       - name: Smoke
         run: bash scripts/mac-smoke.sh src-tauri/target/release/bundle/macos/Lume.app
       - name: Hand the Apple Silicon build to the other macOS versions
-        if: matrix.arch == 'arm64'
         run: tar -czf lume-mac.tgz -C src-tauri/target/release/bundle/macos Lume.app -C "$GITHUB_WORKSPACE/scripts" mac-smoke.sh
       - uses: actions/upload-artifact@v4
-        if: matrix.arch == 'arm64'
         with:
           name: lume-mac-arm64
           path: lume-mac.tgz
@@ -66,7 +58,47 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: shot ${{ matrix.name }}
+          name: shot arm64 · macOS 26
+          path: |
+            shot.png
+            lume.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  x64:
+    name: build + smoke (x64 · macOS 26 Intel)
+    runs-on: macos-26-intel
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: limeflash/lume-client
+          ref: ${{ inputs.ref }}
+          ssh-key: ${{ secrets.LUME_CLIENT_KEY }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+          key: x64
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Unit tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml --bin lume --message-format short
+      - name: Bundle (.app + .dmg)
+        run: pnpm exec tauri build --bundles app,dmg -- --message-format short
+      - name: Smoke
+        run: bash scripts/mac-smoke.sh src-tauri/target/release/bundle/macos/Lume.app
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shot x64 · macOS 26 Intel
           path: |
             shot.png
             lume.log
@@ -75,9 +107,8 @@ jobs:
 
   smoke:
     name: smoke (arm64 · ${{ matrix.name }})
-    needs: build
-    # The x64 build failing is no reason not to try the arm64 one on other versions.
-    if: ${{ !cancelled() }}
+    # Only the Apple Silicon build: the Intel one takes longer and has nothing to hand over.
+    needs: arm64
     strategy:
       fail-fast: false
       matrix:
