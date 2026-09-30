@@ -1,0 +1,31 @@
+{
+  "version": "0.2.46",
+  "notes": "",
+  "pub_date": "2026-09-29T17:43:27Z",
+  "platforms": {
+    "windows-x86_64": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/b80de6cf12c026b66dc616877053a0fa04001a60",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEhBbFI1QXNKaGZqaWJGTyt6L3FmUlFqK1p3MldiVUp6ZDZRYUU1eGkvdjhOR2xBREN0UEViUDBCcDFPQnFjZU9adnltKytpRkpIUksrQWVGTS9oTUFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNjE5NjM3CWZpbGU6THVtZV8wLjIuNDZfeDY0LXNldHVwLmV4ZQpvRDFteWNsdlhTOGVjV2NFKzY0eWViQTl6RjZnaFlGWUNGN3cvbFNjaVVnMDFCMVpTWTZhUkRzMUs2aFRUUVE3WnQ3SjNyR292MG9TT1VHVDdzdVhBdz09Cg=="
+    },
+    "windows-x86_64-nsis": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/b80de6cf12c026b66dc616877053a0fa04001a60",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEhBbFI1QXNKaGZqaWJGTyt6L3FmUlFqK1p3MldiVUp6ZDZRYUU1eGkvdjhOR2xBREN0UEViUDBCcDFPQnFjZU9adnltKytpRkpIUksrQWVGTS9oTUFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNjE5NjM3CWZpbGU6THVtZV8wLjIuNDZfeDY0LXNldHVwLmV4ZQpvRDFteWNsdlhTOGVjV2NFKzY0eWViQTl6RjZnaFlGWUNGN3cvbFNjaVVnMDFCMVpTWTZhUkRzMUs2aFRUUVE3WnQ3SjNyR292MG9TT1VHVDdzdVhBdz09Cg=="
+    },
+    "darwin-aarch64": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/d316e835b7cf53d6b83792c2f8063aaf302f1143",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWENXTzlZSE56ZWRUZ1F3VkRQbHR1Uk1oTXFWeHlnaVlnb2NJbkUyQjFSbkZXc1lxNEtaYUg5bGhxL0pIV1RHQUF4SkQzTUZZOGVBMUFWUGtNRXVTZXdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNzgyOTc0CWZpbGU6THVtZV9hYXJjaDY0LmFwcC50YXIuZ3oKbko4U3BzNGR6MHZldWpPclBZQ0JDSG1VU2xXbkhoVHFTdTRXWmNiMWtsK0xZcDJvWDZ4YnFWbnZZak5RVjBMVzZ3ZVhZbnlWNHBJbU01a2hVelJZREE9PQo="
+    },
+    "darwin-aarch64-app": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/d316e835b7cf53d6b83792c2f8063aaf302f1143",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWENXTzlZSE56ZWRUZ1F3VkRQbHR1Uk1oTXFWeHlnaVlnb2NJbkUyQjFSbkZXc1lxNEtaYUg5bGhxL0pIV1RHQUF4SkQzTUZZOGVBMUFWUGtNRXVTZXdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNzgyOTc0CWZpbGU6THVtZV9hYXJjaDY0LmFwcC50YXIuZ3oKbko4U3BzNGR6MHZldWpPclBZQ0JDSG1VU2xXbkhoVHFTdTRXWmNiMWtsK0xZcDJvWDZ4YnFWbnZZak5RVjBMVzZ3ZVhZbnlWNHBJbU01a2hVelJZREE9PQo="
+    },
+    "darwin-x86_64": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/3ac12faf16467889c9b5d8b3b370eac2d1e0f655",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEJ2Qm5HWHczM0VLQUpoM2s4MHlWWmhhdmh2Y214bFBvS1E3cU5oYWEvbERhNWNhcXJKTkcwaWFvS0lmMGlodk1tWFpyRlpBcEJGU2FXZjFVKzJPOGc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNzgyOTc2CWZpbGU6THVtZV94NjQuYXBwLnRhci5negpzaEhkbTF4cUM3VGhka0RqZDRScllwYVNIZFp5cmZRZ29MK2JzMGVNeVZxNE1uVW5yZi82KzRJMGZSSTBoMlo5d1JZS0FMZmdZUmVFMUFEVnJaaXhEUT09Cg=="
+    },
+    "darwin-x86_64-app": {
+      "url": "https://api.github.com/repos/limeflash/lume-releases/git/blobs/3ac12faf16467889c9b5d8b3b370eac2d1e0f655",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZWExMW50RUJCWEJ2Qm5HWHczM0VLQUpoM2s4MHlWWmhhdmh2Y214bFBvS1E3cU5oYWEvbERhNWNhcXJKTkcwaWFvS0lmMGlodk1tWFpyRlpBcEJGU2FXZjFVKzJPOGc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNzgyOTc2CWZpbGU6THVtZV94NjQuYXBwLnRhci5negpzaEhkbTF4cUM3VGhka0RqZDRScllwYVNIZFp5cmZRZ29MK2JzMGVNeVZxNE1uVW5yZi82KzRJMGZSSTBoMlo5d1JZS0FMZmdZUmVFMUFEVnJaaXhEUT09Cg=="
+    }
+  }
+}
