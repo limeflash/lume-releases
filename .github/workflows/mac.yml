@@ -6,6 +6,8 @@
 # Run: Actions → mac → Run workflow, or  gh workflow run mac.yml -R limeflash/lume-releases -f ref=<ref>
 # Secret: LUME_CLIENT_KEY — the private half of a read-only deploy key on lume-client.
 # These logs are public: cargo prints short diagnostics (no source lines), and no source is uploaded.
+# release-arm64 / release-x64 carry the tested .dmg and the updater archive; the archive is signed
+# locally, so the updater key never comes near this repo.
 name: mac
 
 on:
@@ -48,8 +50,19 @@ jobs:
         run: pnpm exec tauri build --bundles app,dmg -- --message-format short
       - name: Smoke
         run: bash scripts/mac-smoke.sh src-tauri/target/release/bundle/macos/Lume.app
+      - name: Release files — the tested build, the way the updater wants it
+        run: |
+          cd src-tauri/target/release/bundle
+          COPYFILE_DISABLE=1 tar -czf macos/Lume_aarch64.app.tar.gz -C macos Lume.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-arm64
+          path: |
+            src-tauri/target/release/bundle/dmg/*.dmg
+            src-tauri/target/release/bundle/macos/Lume_aarch64.app.tar.gz
+          retention-days: 3
       - name: Hand the Apple Silicon build to the other macOS versions
-        run: tar -czf lume-mac.tgz -C src-tauri/target/release/bundle/macos Lume.app -C "$GITHUB_WORKSPACE/scripts" mac-smoke.sh
+        run: COPYFILE_DISABLE=1 tar -czf lume-mac.tgz -C src-tauri/target/release/bundle/macos Lume.app -C "$GITHUB_WORKSPACE/scripts" mac-smoke.sh
       - uses: actions/upload-artifact@v4
         with:
           name: lume-mac-arm64
@@ -95,6 +108,17 @@ jobs:
         run: pnpm exec tauri build --bundles app,dmg -- --message-format short
       - name: Smoke
         run: bash scripts/mac-smoke.sh src-tauri/target/release/bundle/macos/Lume.app
+      - name: Release files — the tested build, the way the updater wants it
+        run: |
+          cd src-tauri/target/release/bundle
+          COPYFILE_DISABLE=1 tar -czf macos/Lume_x64.app.tar.gz -C macos Lume.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-x64
+          path: |
+            src-tauri/target/release/bundle/dmg/*.dmg
+            src-tauri/target/release/bundle/macos/Lume_x64.app.tar.gz
+          retention-days: 3
       - uses: actions/upload-artifact@v4
         if: always()
         with:
